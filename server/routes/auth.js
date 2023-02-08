@@ -42,7 +42,10 @@ router.post('/login',
     if (passok) {
       jwt.sign({ username,id:user._id }, privateKey, { }, (err,token)=> {
         if(err)throw err;
-        res.cookie('token',token).json('ok');
+        res.cookie('token',token).json({
+          id:user._id,
+          username,
+        });
       });
     }
   }
@@ -57,6 +60,11 @@ router.get('/profile',
     })
   res.json(req.cookies);
 }
+)
+router.post('/logout',
+  (req,res)=>{
+    res.cookie('token','').json('ok');
+  }
 )
 
 module.exports = router

@@ -1,10 +1,13 @@
 import React from 'react'
+import { useContext } from 'react';
 import { useState } from 'react'
 import { useNavigate } from "react-router-dom";
+import { UserContext } from '../context/Usercontext';
 const Login = () => {
   const [username, setusername] = useState('');
   const [password, setpassword] = useState('');
   const navigate = useNavigate();
+  const {setUserInfo} = useContext(UserContext);
   const onchange1=(e)=>{
      setusername(e.target.value);
   }
@@ -22,7 +25,12 @@ const Login = () => {
      credentials:"include",
     });
     if(response.ok)
+    {  response.json().then(userInfo=>{
+      setUserInfo(userInfo);
+    })
       navigate("/");
+    }
+     
       else 
       alert('Wrong Crendentials')
     
