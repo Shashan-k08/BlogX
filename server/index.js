@@ -12,5 +12,5 @@ app.use(express.json());
 app.use(cookieParser())
 
 app.use('/api/auth',require('./routes/auth'));
-// app.use('/api/auth',require('./routes/auth'));
+app.use('/api/post',require('./routes/post'));
 app.listen(5000)

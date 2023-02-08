@@ -1,6 +1,6 @@
 import React from 'react'
-
- const post = () => {
+import {format} from "date-fns";
+ const post = ({title,summary,cover,content,createdAt}) => {
   return (
     <div>
       <div className="post">
@@ -8,12 +8,12 @@ import React from 'react'
           <img src="https://techcrunch.com/wp-content/uploads/2022/07/this-week-in-apps-splash-2022.webp?w=730&crop=1" />
         </div>
         <div className="texts">
-          <h2>Full-house backup coming later this year</h2>
+          <h2>{title}</h2>
           <p className="info">
             <a href className="author"> Shashank Tiwari</a>
-            <time>2023-03-08</time>
+            <time>{ format(new Date(createdAt),'MMM d,yyyy HH:mm')}</time>
           </p>
-          <p className="summary">Today at its special laubch event home backup power . shashank is a good boy.Hello there what gong on</p>
+          <p className="summary">{summary}</p>
         </div>
       </div>
     </div>
