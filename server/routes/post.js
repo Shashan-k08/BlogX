@@ -28,8 +28,8 @@ router.post('/newpost',upload.single('file'),async (req,res)=>{
                author:info.id,
            }
        )
-       res.json(postdoc);
-      res.json(info);
+      // res.json(postdoc);
+     // res.json(info);
       })
     res.json(req.cookies);
    
