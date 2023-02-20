@@ -15,6 +15,7 @@ const Homepage = () => {
   
   return (
     <>
+    
     {posts.length >0 && posts.map(post=>(
       <Post {...post}/>
     ))}
