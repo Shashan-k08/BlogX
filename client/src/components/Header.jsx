@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useEffect} from 'react';
 import { useContext } from 'react';
 import { UserContext } from '../context/Usercontext';
+import Profile from './Profile';
 const Header = () => {
   const {setUserInfo,UserInfo}=useContext(UserContext);
  
@@ -51,7 +52,7 @@ const Header = () => {
               <Link to="/signup">Register</Link>
             </>)
           }
-
+            <Profile/>
         </nav>
       </header>
     </div>
