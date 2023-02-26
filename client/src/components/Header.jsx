@@ -7,9 +7,11 @@ import logo from '../img/60995.png'
 import user from '../img/User image.png'
 const Header = () => {
   const { setUserInfo, UserInfo } = useContext(UserContext);
-
+  var modal = document.getElementById("myModal");
+  const Rot = document.getElementById("Btn");
 
   const logout = async () => {
+    modal.style.display = "none";
     await fetch('http://localhost:5000/api/auth/logout',
       {
         credentials: 'include',
@@ -35,8 +37,7 @@ const Header = () => {
   )
   const username = UserInfo?.username;
 
-  var modal = document.getElementById("myModal");
-  const Rot = document.getElementById("Btn");
+ 
   const fun1 = () => {
     const dis = modal.style.display;
 
@@ -68,7 +69,11 @@ const Header = () => {
               <Link to="/create">Create New Post</Link>
               {/* eslint-disable-next-line */}
               <a onClick={logout}>Logout({username})</a>
-            </>
+          <div className="user-img"><img src={user} alt="" /></div>
+          <div className="myBtn" onClick={fun1}  >
+            <img id='Btn' onClick={Rotate} alt="" src={logo} />
+          </div>
+          </>
           )}
           {!username && (
             <>
@@ -76,16 +81,16 @@ const Header = () => {
               <Link to="/signup">Register</Link>
             </>)
           }
-
-        <div className="user-img"><img src={user} alt=""/></div>
-            <div className="myBtn" onClick={fun1}  >
-             <img id='Btn' onClick={Rotate} alt="" src={logo} />
-              </div>
         </nav>
       </header>
       <div id="myModal" className="modal">
-        <div className="modal-content"> </div>
+        <div className="modal-content"> 
+        <div className="user">{username}</div>
+        <div className="edit-profile">Profile</div>
+        <div className="logout" onClick={logout}>Logout</div>
+        </div>
       </div>
+      
     </div>
   )
 }
