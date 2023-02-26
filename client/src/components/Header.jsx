@@ -66,10 +66,10 @@ const Header = () => {
         <nav>
           {username && (
             <>
-              <Link to="/create">Create New Post</Link>
+              <Link to="/create" className='hover-box'>Create New Post</Link>
               {/* eslint-disable-next-line */}
               <a onClick={logout}>Logout({username})</a>
-          <div className="user-img"><img src={user} alt="" /></div>
+          <div className="user-img pointer" ><img src={user} alt="" /></div>
           <div className="myBtn" onClick={fun1}  >
             <img id='Btn' onClick={Rotate} alt="" src={logo} />
           </div>
@@ -77,17 +77,17 @@ const Header = () => {
           )}
           {!username && (
             <>
-              <Link to="/login">Login</Link>
-              <Link to="/signup">Register</Link>
+              <Link to="/login" className='Button'>Login</Link>
+              <Link to="/signup" className='Button'>Register</Link>
             </>)
           }
         </nav>
       </header>
       <div id="myModal" className="modal">
         <div className="modal-content"> 
-        <div className="user">{username}</div>
-        <div className="edit-profile">Profile</div>
-        <div className="logout" onClick={logout}>Logout</div>
+        <div className="user pointer hover-box">{username}</div>
+        <Link to="/profile" className="edit-profile pointer hover-box">Profile</Link>
+        <div className='Button pointer' onClick={logout}>Logout</div>
         </div>
       </div>
       
