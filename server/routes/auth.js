@@ -1,7 +1,7 @@
 const express = require('express');
 const User = require('../models/User');
 var jwt = require('jsonwebtoken');
-const { body } = require('express-validator');
+const { body,validationResult  } = require('express-validator');
 const router = express.Router();
 var cookieParser = require('cookie-parser')
 const privateKey="jhagsfsakdgfduy";

@@ -15,11 +15,12 @@ const Homepage = () => {
   
   return (
     <>
+    <div className="post-box">
     
     {posts.length >0 && posts.map(post=>(
       <Post {...post}/>
     ))}
-    
+    </div>
     </>
        
   )
