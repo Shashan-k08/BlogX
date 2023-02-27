@@ -1,6 +1,6 @@
 
 import './App.css';
-import './Style.Scss';
+import './index.Scss';
 // import Header from './components/Header';
 // import Post from "./components/Post.js";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
