@@ -1,37 +1,45 @@
 import React from 'react'
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 
-const SignUp = () => {
-  const [username, setusername] = useState('');
-  const [password, setpassword] = useState('');
-  const onchange1 =(e)=>{
-   setusername(e.target.value)
+const SignUp = (props) => {
+  const [credentials, setcredentials] = useState({ username: "", password: "" })
+  const host = "http://localhost:5000";
+  let navigate = useNavigate();
+
+  const submit = async (e) => {
+    e.preventDefault();
+    const { username, password } = credentials;
+    const response = await fetch(`${host}/api/auth/signup`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ username, password })
+    });
+    const json = await response.json();
+    console.log(json)
+    // save the verification token and redirect
+    if (json.success) {
+      localStorage.setItem('token', json.verificationtoken);
+      navigate("/");
+      props.showalert("Account created Successfully", "success")
+    }
+    else {
+      props.showalert("Invalid credentials", "danger")
+    }
+  }
+  const onchange = (e) => {
+    setcredentials({ ...credentials, [e.target.name]: e.target.value })
   }
 
-  const onchange2 =(e)=>{
-    setpassword(e.target.value);
-  }
-const submit = async(e)=>{
-   e.preventDefault();
-   const response= await fetch('http://localhost:5000/api/auth/signup' ,
-   {
-    method:'POST',
-    body:JSON.stringify({username,password}),
-    headers:{'Content-Type':'application/json'},
-   });
-   if(response.status===200){
-    alert("Registration Successful");
-   }
-   else
-   alert("Registration failed");
-}
   return (
     <div>
-        
+
       <form className='signup' onSubmit={submit}>
         <h1>SignUp</h1>
-        <input type="text" placeholder="username" value={username} onChange={onchange1}/>
-        <input type="password" placeholder="password" value={password} onChange={onchange2}/>
+        <input type="text" placeholder="username" name="username" onChange={onchange} />
+        <input type="password" placeholder="password" name="password" onChange={onchange} />
         <button>Register</button>
       </form>
     </div>

@@ -1,46 +1,47 @@
 import React from 'react'
-import { useContext } from 'react';
+
 import { useState } from 'react'
 import { useNavigate } from "react-router-dom";
-import { UserContext } from '../context/Usercontext';
-const Login = () => {
-  const [username, setusername] = useState('');
-  const [password, setpassword] = useState('');
-  const navigate = useNavigate();
-  const {setUserInfo} = useContext(UserContext);
-  const onchange1=(e)=>{
-     setusername(e.target.value);
-  }
-  const onchange2 =(e)=>{
-    setpassword(e.target.value);
-  }
+const Login = (props) => {
+  const host = "http://localhost:5000";
+  const [credentials, setcredentials] = useState({ username: "", password: "" })
 
-  const submit= async(e)=>{
+  const navigate = useNavigate();
+  
+  const submit = async (e) => {
     e.preventDefault();
-    const response= await fetch('http://localhost:5000/api/auth/login' ,
-    {
-     method:'POST',
-     body:JSON.stringify({username,password}),
-     headers:{'Content-Type':'application/json'},
-     credentials:"include",
+    const response = await fetch(`${host}/api/auth/login`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({username:credentials.username,password:credentials.password})
     });
-    if(response.ok)
-    {  response.json().then(userInfo=>{
-      setUserInfo(userInfo);
-    })
-      navigate("/");
+    const json = await response.json();
+    console.log(json)
+    if(json.success)
+    {
+        // save the verification token and redirect
+        localStorage.setItem('token',json.verificationtoken);
+        navigate("/");
+        props.showalert("Logged-in Successfully", "success")
+
     }
-     
-      else 
-      alert('Wrong Crendentials')
-    
-  }
+    else
+    {
+        props.showalert("Invalid details","danger")
+    }
+}
+
+const onchange = (e) => {
+  setcredentials({ ...credentials, [e.target.username]: e.target.value })
+}
   return (
     <div>
       <form className='login' onSubmit={submit}>
         <h1>Login</h1>
-        <input type="text" placeholder="username" value={username} onChange={onchange1}/>
-        <input type="password" placeholder="password" value={password} onChange={onchange2}/>
+        <input type="text" placeholder="username" value={credentials.username} name="username"  onChange={onchange}/>
+        <input type="password" placeholder="password" value={credentials.password} name="password" onChange={onchange}/>
          <button>Login</button>
       </form>
     </div>
