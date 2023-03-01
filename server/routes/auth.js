@@ -3,29 +3,53 @@ const User = require('../models/User');
 var jwt = require('jsonwebtoken');
 const { body,validationResult  } = require('express-validator');
 const router = express.Router();
+const JWT_SECRET = "shhhh";
 var cookieParser = require('cookie-parser')
 const privateKey="jhagsfsakdgfduy";
 router.post('/signup',
 
   [
-    body('name', 'Enter a valid name').isLength({ min: 3 }),
+    body('username', 'Enter a valid name').isLength({ min: 3 }),
     body('password', 'Password must be of at least 5 charactors').isLength({ min: 5 })
   ],
   async (req, res) => {
-    // let user = await User.findOne();
-    console.log(req.body.name)
-
-    let user = await User.create({
-      name: req.body.username,
-      password: req.body.password
-    });
-
-    const data = {
-      user: {
-        id: user.id
-      }
+    let success=false;
+    // if there are errors then check error and rwturn bad request and that error
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({success, errors: errors.array() });
     }
-    res.json(user);
+    // check weather user with this email already exist
+    try {
+
+
+      let user = await User.findOne({ name:req.body.username });
+      console.log(user);
+      if (user) {
+        return res.status(400).json({ success, error: "Sorry a user with this name already exist" })
+      }
+
+      user = await User.create({
+        name: req.body.username,
+        password: req.body.password,
+      });
+
+      const data = {
+        user: {
+          id: user.id
+        }
+      }
+      const verificationtoken = jwt.sign(data, JWT_SECRET);
+
+      // .then(user => res.json(user))
+      // .catch(err=>{console.log(err)
+      // res.json({error:'Please enter a unique value for email'})})
+   success=true;
+      res.json({success,verificationtoken });
+    } catch (error) {
+      console.error(error.message);
+      res.status(500).send("Internal server error");
+    }
   }
 )
 
@@ -35,18 +59,41 @@ router.post('/login',
     body('password', 'Password must be of at least 5 charactors').isLength({ min: 5 })
   ],
   async (req, res) => {
+    let success=false;
+    // if there are errors then check error and rwturn bad request and that error
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
 
     const { username, password } = req.body;
-    const user = await User.findOne({ username });
-    const passok = user.password;
-    if (passok) {
-      jwt.sign({ username,id:user._id }, privateKey, { }, (err,token)=> {
-        if(err)throw err;
-        res.cookie('token',token).json({
-          id:user._id,
-          username,
-        });
-      });
+
+    try {
+
+      let user = await User.findOne({ username });
+      if (!user) {
+        success=false
+        return res.status(400).json({ error: "Please try login with correct crendentials" });
+      }
+
+      if (!password) {
+        success=false
+        return res.status(400).json({success, error: "Please try login with correct crendentials" });
+
+      }
+
+      const data = {
+        user: {
+          id: user.id
+        }
+      }
+      const verificationtoken = jwt.sign(data, JWT_SECRET);
+      success=true;
+      res.json({success, verificationtoken });
+
+    } catch (error) {
+      console.error(error.message);
+      res.status(500).send("Internal server error");
     }
   }
 )
