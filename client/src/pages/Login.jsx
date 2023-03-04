@@ -34,15 +34,15 @@ const Login = (props) => {
 }
 
 const onchange = (e) => {
-  setcredentials({ ...credentials, [e.target.username]: e.target.value })
+  setcredentials({ ...credentials, [e.target.name]: e.target.value })
 }
   return (
     <div>
-      <form className='login' onSubmit={submit}>
+      <form className='login ' onSubmit={submit}>
         <h1>Login</h1>
         <input type="text" placeholder="username" value={credentials.username} name="username"  onChange={onchange}/>
         <input type="password" placeholder="password" value={credentials.password} name="password" onChange={onchange}/>
-         <button>Login</button>
+         <button className='pointer'>Login</button>
       </form>
     </div>
   )

@@ -40,7 +40,7 @@ const SignUp = (props) => {
         <h1>SignUp</h1>
         <input type="text" placeholder="username" name="username" onChange={onchange} />
         <input type="password" placeholder="password" name="password" onChange={onchange} />
-        <button>Register</button>
+        <button className='pointer'>Register</button>
       </form>
     </div>
   )

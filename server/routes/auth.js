@@ -55,7 +55,7 @@ router.post('/signup',
 
 router.post('/login',
   [
-    body('name', 'Enter a valid name').isLength({ min: 3 }),
+    body('username', 'Enter a valid name').isLength({ min: 3 }),
     body('password', 'Password must be of at least 5 charactors').isLength({ min: 5 })
   ],
   async (req, res) => {
@@ -98,14 +98,9 @@ router.post('/login',
   }
 )
 
-router.get('/profile',
-(req,res)=>{
-  const {token}= req.cookies;
-  jwt.verify(token,privateKey,{},(err,info)=>{
-    if(err) throw err
-    res.json(info);
-    })
-  res.json(req.cookies);
+router.get('/profile', async (req,res)=>{
+ const userdata= await User.findOne({user:req.user.id});
+ res.json(userdata);
 }
 )
 router.post('/logout',
