@@ -1,68 +1,65 @@
 import React from 'react'
-import ReactQuill from 'react-quill'
-import 'react-quill/dist/quill.snow.css';
-import { useState } from 'react';
-import { useNavigate } from "react-router-dom";
-const Newpost = () => {
-    const navigate = useNavigate();
-    const [title, settitle] = useState('')
-    const [summary, setsummary] = useState('')
-    const [content, setcontent] = useState('')
-    const [file, setfile] = useState('');
 
-    const change1 = (e) => {
-        settitle(e.target.value)
-    }
-    const change2 = (e) => {
-        setsummary(e.target.value)
-    }
+import { useState,useContext } from 'react';
+import { useNavigate } from "react-router-dom";
+import userContext from '../context/userContext';
+const Newpost = () => {
+    const context = useContext(userContext);
+    const { addPost } = context;
+    const navigate = useNavigate();
+    const [post, setPost] = useState({ title: "", summary: "", content: "" });
+
+
+    // const change1 = (e) => {
+    //     settitle(e.target.value)
+    // }
+    // const change2 = (e) => {
+    //     setsummary(e.target.value)
+    // }
     // const change3 = (newValue) => {
     //     setcontent(newValue.target.value)
     // }
 
     const submit = async (e) => {
-        const data = new FormData();
-        data.set('title',title);
-        data.set('summary',summary);
-        data.set('content',content);
-        data.set('file',file[0]);
-        e.preventDefault();
-        // console.log(file);
+        addPost(post.title,post.summary,post.content);
 
-      const response= await  fetch('http://localhost:5000/api/post/newpost',
-            {
-                method: "POST",
-                body:data,
-                credentials:'include',
-            }
-        )
-       if(response.ok)
+        // const data = new FormData();
+        // data.set('title',title);
+        // data.set('summary',summary);
+        // data.set('content',content);
+        // data.set('file',file[0]);
+        e.preventDefault();
+        // console.log(file)
+    //    if(response.ok)
        navigate("/");
     }
-    const modules = {
-        toolbar: [
-            [{ 'header': [1, 2, false] }],
-            ['bold', 'italic', 'underline', 'strike', 'blockquote'],
-            [{ 'list': 'ordered' }, { 'list': 'bullet' }, { 'indent': '-1' }, { 'indent': '+1' }],
-            ['link', 'image'],
-            ['clean']
-        ],
-    }
+    // const modules = {
+    //     toolbar: [
+    //         [{ 'header': [1, 2, false] }],
+    //         ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+    //         [{ 'list': 'ordered' }, { 'list': 'bullet' }, { 'indent': '-1' }, { 'indent': '+1' }],
+    //         ['link', 'image'],
+    //         ['clean']
+    //     ],
+    // }
 
-    const formats = [
-        'header',
-        'bold', 'italic', 'underline', 'strike', 'blockquote',
-        'list', 'bullet', 'indent',
-        'link', 'image'
-    ]
+    // const formats = [
+    //     'header',
+    //     'bold', 'italic', 'underline', 'strike', 'blockquote',
+    //     'list', 'bullet', 'indent',
+    //     'link', 'image'
+    // ]
+    const onChange = (e) => {
+        setPost({ ...post, [e.target.name]: e.target.value })
+    }
     return (
         <div>
             <form onSubmit={submit}>
-                <input type="title" placeholder="Title" value={title} onChange={change1} />
-                <input type="summary" placeholder="Summary" onChange={change2} value={summary} />
-                <input type="file"  onChange={ev => setfile(ev.target.files)} />
-                <ReactQuill value={content} modules={modules} onChange={ newValue=>setcontent(newValue)} formats={formats} />
-                <button style={{ marginTop: "5px" }}>Create post</button>
+                <input type="title" name='title' placeholder="Title" value={post.title} onChange={onChange} />
+                <input type="summary" name='summary' placeholder="Summary" onChange={onChange} value={post.summary} />
+                {/* <input type="file" name='file' onChange={onChange} /> */}
+                <input name="content" value={post.content}  onChange={onChange}  />
+                <button className='pointer' disabled={post.title.length<5||post.summary.length<5||post.content.length<5} style={{ marginTop: "5px" }}>Create post</button>
             </form>
         </div>
     )

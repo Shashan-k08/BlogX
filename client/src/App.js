@@ -11,9 +11,10 @@ import Profile from './pages/Profile';
 import SignUp from './pages/SignUp';
 
 import Newpost from './pages/Newpost';
+import BlogState from './context/BlogState';
 function App() {
   return (
-
+    <BlogState>
     <BrowserRouter>
 
       <Routes>
@@ -27,6 +28,7 @@ function App() {
       </Routes>
 
     </BrowserRouter>
+    </BlogState>
   );
 }
 
