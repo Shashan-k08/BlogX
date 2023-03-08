@@ -1,4 +1,3 @@
-
 import './App.css';
 
 // import Header from './components/Header';
@@ -18,13 +17,13 @@ function App() {
     <BrowserRouter>
 
       <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Homepage />} />
+      
+          <Route path='/' element={<Homepage />} />
           <Route path={'/login'} element={<Login />} />
           <Route path={'/signup'} element={<SignUp />} />
           <Route path={'/create'} element={<Newpost />} />
           <Route path={'/profile'} element={<Profile />} />
-        </Route>
+       
       </Routes>
 
     </BrowserRouter>

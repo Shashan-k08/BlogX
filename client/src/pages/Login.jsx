@@ -24,12 +24,12 @@ const Login = (props) => {
         // save the verification token and redirect
         localStorage.setItem('token',json.verificationtoken);
         navigate("/");
-        props.showalert("Logged-in Successfully", "success")
+        // props.showalert("Logged-in Successfully", "success")
 
     }
     else
-    {
-        props.showalert("Invalid details","danger")
+    { console.log("hey")
+        // props.showalert("Invalid details","danger")
     }
 }
 

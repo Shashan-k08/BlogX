@@ -1,7 +1,5 @@
 import React from 'react'
 import { Link, useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
-import { useContext } from 'react';
 
 import logo from '../img/60995.png'
 import user from '../img/User image.png'
@@ -22,26 +20,19 @@ const Header = () => {
       modal.style.display = "block";
     }
   }
-  const Rotate = () => {
-    const Rot = document.getElementById("Btn");
-    Rot.style.transform = "rotate(180deg)";
-  }
+  // const Rotate = () => {
+  //   const Rot = document.getElementById("Btn");
+  //   Rot.style.transform = "rotate(180deg)";
+  // }
 
   window.onclick = function (event) {
     // const modal = document.getElementById("myModal")
     if (event.target.id !== "Btn") {
-      console.log("hey")
+      console.log("heylll")
       document.getElementById("myModal").style.display = "none";
     }
   }
 
-
-
-  // window.onclick = function (event) {
-  //   if(document.getElementById("myModal").style.display ==="block")
-  //   document.getElementById("myModal").style.display = "none";
-
-  // }
   const handlelogout = () => {
     localStorage.removeItem('token');
     navigate('/login');
