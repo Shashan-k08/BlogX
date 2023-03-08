@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-
+import imag1 from '../img/Blog-img1.png';
 const SignUp = (props) => {
   const [credentials, setcredentials] = useState({ username: "", password: "" })
   const host = "http://localhost:5000";
@@ -34,14 +34,19 @@ const SignUp = (props) => {
   }
 
   return (
-    <div>
-
-      <form className='signup' onSubmit={submit}>
-        <h1>SignUp</h1>
-        <input type="text" placeholder="username" name="username" onChange={onchange} />
-        <input type="password" placeholder="password" name="password" onChange={onchange} />
-        <button className='pointer'>Register</button>
-      </form>
+    <div className='signup-container column'>
+      <div className="logo">BLogX <b>.</b></div>
+      <div className="wrapper row" >
+        <div className="wrapper1"> <img src={imag1} alt=''/></div>
+        <div className="wrapper2">
+          <form className='signup' onSubmit={submit}>
+            <h1>SignUp</h1>
+            <input type="text" placeholder="username" name="username" onChange={onchange} />
+            <input type="password" placeholder="password" name="password" onChange={onchange} />
+            <button className='pointer'>Register</button>
+          </form>
+        </div>
+      </div>
     </div>
   )
 }
