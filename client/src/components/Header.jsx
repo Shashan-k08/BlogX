@@ -53,14 +53,15 @@ const Header = () => {
 
 
         </nav>
-      </header>
-      <div id="myModal" className="modal">
+        <div id="myModal" className="modal">
         <div className="modal-content">
           <div className="user pointer hover-box"></div>
-          <Link to="/profile" className="edit-profile pointer hover-box">Profile</Link>
+          <Link to="/profile" className=" Button  pointer">Profile</Link>
           <div className='Button pointer' onClick={handlelogout}>Logout</div>
         </div>
       </div>
+      </header>
+      
 
     </div>
   )

@@ -24,7 +24,7 @@ const Login = (props) => {
         // save the verification token and redirect
         localStorage.setItem('token',json.verificationtoken);
         navigate("/");
-        // props.showalert("Logged-in Successfully", "success")
+         props.showalert("Logged-in Successfully", "success")
 
     }
     else
@@ -37,14 +37,46 @@ const onchange = (e) => {
   setcredentials({ ...credentials, [e.target.name]: e.target.value })
 }
   return (
-    <div>
-      <form className='login ' onSubmit={submit}>
-        <h1>Login</h1>
-        <input type="text" placeholder="username" value={credentials.username} name="username"  onChange={onchange}/>
-        <input type="password" placeholder="password" value={credentials.password} name="password" onChange={onchange}/>
-         <button className='pointer'>Login</button>
-      </form>
-    </div>
+  
+    <div className="container">
+    <div className="forms-container">
+      <div className="logo"> BLogX <b>.</b> </div>
+      <div className="signin-signup">
+        <form onSubmit={submit} className="sign-in-form">
+          <h2 className="title">Sign in</h2>
+          <div className="input-field">
+            <i className="fas fa-user"></i>
+            <input type="text" placeholder="Username" name='username' value={credentials.username} onChange={onchange}/>
+          </div>
+          <div className="input-field">
+          <i className="fas fa-lock"></i>
+            <input type="password" placeholder="Password" name='password' value={credentials.password} onChange={onchange} />
+          </div>
+          <p> <u>Forgot Password?</u></p>
+          <input type="submit" value="Login" className="btn solid" />
+          <p className="social-text">Or Sign in with social platforms</p>
+          <div className="social-media">
+            <a href="/" className="social-icon">
+              <i className="fab fa-facebook-f"></i>
+     
+            </a>
+            <a href="/" className="social-icon">
+              <i className="fab fa-twitter"></i>
+            </a>
+            <a href="/" className="social-icon">
+              <i className="fab fa-google"></i>
+            </a>
+            <a href="/" className="social-icon">
+              <i className="fab fa-linkedin-in"></i>
+            </a>
+          </div>
+          <p>Don't Have an Account?</p> < input type="submit" onClick={()=>{navigate("/signup")}}  className="btn" value="SIGN UP" onSubmit={submit} />
+          
+        </form>
+        
+        </div>
+        </div>
+        </div>
   )
 }
 

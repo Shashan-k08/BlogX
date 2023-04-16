@@ -31,6 +31,7 @@ router.post('/signup',
 
       user = await User.create({
         name: req.body.username,
+        email:req.body.email,
         password: req.body.password,
       });
 
@@ -102,11 +103,6 @@ router.get('/profile', async (req,res)=>{
  const userdata= await User.findOne({user:req.user.id});
  res.json(userdata);
 }
-)
-router.post('/logout',
-  (req,res)=>{
-    res.cookie('token','').json('ok');
-  }
 )
 
 module.exports = router

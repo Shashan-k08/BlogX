@@ -57,7 +57,7 @@ const Newpost = () => {
             <form onSubmit={submit}>
                 <input type="title" name='title' placeholder="Title" value={post.title} onChange={onChange} />
                 <input type="summary" name='summary' placeholder="Summary" onChange={onChange} value={post.summary} />
-                {/* <input type="file" name='file' onChange={onChange} /> */}
+                <input type="file" name='file' onChange={onChange} />
                 <input name="content" value={post.content}  onChange={onChange}  />
                 <button className='pointer' disabled={post.title.length<5||post.summary.length<5||post.content.length<5} style={{ marginTop: "5px" }}>Create post</button>
             </form>
