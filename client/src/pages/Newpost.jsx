@@ -33,28 +33,29 @@ const Newpost = () => {
     //    if(response.ok)
        navigate("/");
     }
-    // const modules = {
-    //     toolbar: [
-    //         [{ 'header': [1, 2, false] }],
-    //         ['bold', 'italic', 'underline', 'strike', 'blockquote'],
-    //         [{ 'list': 'ordered' }, { 'list': 'bullet' }, { 'indent': '-1' }, { 'indent': '+1' }],
-    //         ['link', 'image'],
-    //         ['clean']
-    //     ],
-    // }
-
-    // const formats = [
-    //     'header',
-    //     'bold', 'italic', 'underline', 'strike', 'blockquote',
-    //     'list', 'bullet', 'indent',
-    //     'link', 'image'
-    // ]
+    const modules = {
+        toolbar: [
+            [{ 'header': [1, 2, false] }],
+            ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+            [{ 'list': 'ordered' }, { 'list': 'bullet' }, { 'indent': '-1' }, { 'indent': '+1' }],
+            ['link', 'image'],
+            ['clean']
+        ],
+    }
+ 
+   const formats = [
+        'header',
+        'bold', 'italic', 'underline', 'strike', 'blockquote',
+        'list', 'bullet', 'indent',
+        'link', 'image'
+    ]
     const onChange = (e) => {
         setPost({ ...post, [e.target.name]: e.target.value })
     }
     return (
-        <div>
-            <form onSubmit={submit}>
+        <div className='postbox'>
+            <div className="quote-box">Conversation is king. Content is just something to talk about <br></br> ~Cory Doctorow </div>
+            <form className='post' onSubmit={submit}>
                 <input type="title" name='title' placeholder="Title" value={post.title} onChange={onChange} />
                 <input type="summary" name='summary' placeholder="Summary" onChange={onChange} value={post.summary} />
                 <input type="file" name='file' onChange={onChange} />
