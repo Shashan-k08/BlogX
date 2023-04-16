@@ -41,7 +41,7 @@ const Header = () => {
     <div>
       <header>
         <Link to='/' className='logo'>My Blog</Link>
-        <nav>
+        <div className='navbar'>
 
           {localStorage.getItem('token') ? <><Link to="/create" className='hover-box'>Create New Post</Link>
             <div className="user-img pointer" ><img src={user} alt="" /></div>
@@ -52,7 +52,7 @@ const Header = () => {
           }
 
 
-        </nav>
+        </div>
         <div id="myModal" className="modal">
         <div className="modal-content">
           <div className="user pointer hover-box"></div>
