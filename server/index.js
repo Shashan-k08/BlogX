@@ -3,7 +3,7 @@ const db =require('./db');
 const app = express();
 var cookieParser = require('cookie-parser')
 var cors = require('cors')
- app.use(cors({credentials:true ,origin:'http://localhost:3001'}));
+ app.use(cors({credentials:true ,origin:'http://localhost:3003'}));
 // app.post('/signup',(req,res)=>{
 //     res.json('test ok');
 // })

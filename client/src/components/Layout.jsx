@@ -5,7 +5,7 @@ import Header from './Header'
 const Layout = () => {
   return (
     <div>
-     { !localStorage.getItem('token') ?
+     {/* { !localStorage.getItem('token') ? */}
       <main>
         
       <Outlet/>
@@ -15,7 +15,7 @@ const Layout = () => {
         <Header/>
       <Outlet/>
       </main>
-      }
+      {/* } */}
         
     </div>
   )
