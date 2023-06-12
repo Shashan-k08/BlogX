@@ -2,6 +2,7 @@ import React from 'react'
 import Post from '../components/Post'
 import { useEffect,useState } from 'react'
 import Header from '../components/Header'
+
 const Homepage = () => {
   const [posts, setposts] = useState([])
   useEffect(() => {

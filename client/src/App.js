@@ -11,9 +11,10 @@ import SignUp from './pages/SignUp';
 
 import Newpost from './pages/Newpost';
 import BlogState from './context/BlogState';
+import About from './pages/About';
 function App() {
   return (
-    <BlogState>
+   
     <BrowserRouter>
 
       <Routes>
@@ -23,11 +24,12 @@ function App() {
           <Route path={'/signup'} element={<SignUp />} />
           <Route path={'/create'} element={<Newpost />} />
           <Route path={'/profile'} element={<Profile />} />
+          <Route path={'/about'} element={<About/>} />
        
       </Routes>
 
     </BrowserRouter>
-    </BlogState>
+  
   );
 }
 

@@ -1,38 +1,33 @@
 import React from 'react'
 
-import { useState,useContext } from 'react';
+import { useState, useContext } from 'react';
 import { useNavigate } from "react-router-dom";
 import userContext from '../context/userContext';
+const host = "http://localhost:5000";
 const Newpost = () => {
-    const context = useContext(userContext);
-    const { addPost } = context;
+
     const navigate = useNavigate();
     const [post, setPost] = useState({ title: "", summary: "", content: "" });
-
-
-    // const change1 = (e) => {
-    //     settitle(e.target.value)
-    // }
-    // const change2 = (e) => {
-    //     setsummary(e.target.value)
-    // }
-    // const change3 = (newValue) => {
-    //     setcontent(newValue.target.value)
-    // }
-
+    const [file, setfile] = useState(null)
     const submit = async (e) => {
-        addPost(post.title,post.summary,post.content);
+        console.log(file)
+        //Api call    
+        e.preventDefault()
+        const response = await fetch(`${host}/api/post/newpost`, {
+            method: "POST",
+            headers: {
 
-        // const data = new FormData();
-        // data.set('title',title);
-        // data.set('summary',summary);
-        // data.set('content',content);
-        // data.set('file',file[0]);
-        e.preventDefault();
-        // console.log(file)
-    //    if(response.ok)
-       navigate("/");
+                'Content-Type': 'application/json',
+                "auth-token": localStorage.getItem('token')
+            },
+            body:  JSON.stringify({ title: post.title, summary: post.summary, content: post.content},formData)
+        })
+        // eslint-disable-next-line
+        const json = await response.json();
+        console.log(json);
+        console.log("Adding a new note")
     }
+
     const modules = {
         toolbar: [
             [{ 'header': [1, 2, false] }],
@@ -42,8 +37,8 @@ const Newpost = () => {
             ['clean']
         ],
     }
- 
-   const formats = [
+
+    const formats = [
         'header',
         'bold', 'italic', 'underline', 'strike', 'blockquote',
         'list', 'bullet', 'indent',
@@ -52,15 +47,26 @@ const Newpost = () => {
     const onChange = (e) => {
         setPost({ ...post, [e.target.name]: e.target.value })
     }
+    const formData = new FormData();
+    const handleImageSelect = (event) => {
+        setfile(event.target.files[0]);
+
+
+        // Append the image file to the FormData object
+        formData.append('image', file);
+    };
+
+
+
     return (
         <div className='new-postbox'>
             <div className="quote-box">Conversation is king. Content is just something to talk about <br></br> ~Cory Doctorow </div>
             <form className='new-post' onSubmit={submit}>
                 <input type="title" name='title' placeholder="Title" value={post.title} onChange={onChange} />
                 <input type="summary" name='summary' placeholder="Summary" onChange={onChange} value={post.summary} />
-                <input type="file" name='file' onChange={onChange} />
-                <input name="content" value={post.content}  onChange={onChange}  />
-                <button className='pointer' disabled={post.title.length<5||post.summary.length<5||post.content.length<5} style={{ marginTop: "5px" }}>Create post</button>
+                <input type="file" name='file' accept="image/*" onChange={handleImageSelect} />
+                <input name="content" value={post.content} onChange={onChange} />
+                <button className='pointer' disabled={post.title.length < 5 || post.summary.length < 5 || post.content.length < 5} style={{ marginTop: "5px" }}>Create post</button>
             </form>
         </div>
     )
