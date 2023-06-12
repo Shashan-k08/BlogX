@@ -7,27 +7,49 @@ const host = "http://localhost:5000";
 const Newpost = () => {
 
     const navigate = useNavigate();
-    const [post, setPost] = useState({ title: "", summary: "", content: "" });
-    const [file, setfile] = useState(null)
-    const submit = async (e) => {
-        console.log(file)
-        //Api call    
-        e.preventDefault()
-        const response = await fetch(`${host}/api/post/newpost`, {
-            method: "POST",
-            headers: {
+    const [title, settitle] = useState('')
+    const [summary, setsummary] = useState('')
+    const [content, setcontent] = useState('')
+    const [file, setfile] = useState('');
 
-                'Content-Type': 'application/json',
-                "auth-token": localStorage.getItem('token')
-            },
-            body:  JSON.stringify({ title: post.title, summary: post.summary, content: post.content},formData)
-        })
-        // eslint-disable-next-line
-        const json = await response.json();
-        console.log(json);
-        console.log("Adding a new note")
+    const onChange1 = (e) => {
+        settitle(e.target.value)
+       
+    }
+    const onChange2 = (e) => {
+      
+        setsummary(e.target.value)
+        
+    }
+    const onChange3 = (e) => {
+       
+        setcontent(e.target.value)
     }
 
+    // const change3 = (newValue) => {
+    //     setcontent(newValue.target.value)
+    // }
+
+    const submit = async (e) => {
+        const data = new FormData();
+        data.set('title', title);
+        data.set('summary', summary);
+        data.set('content', content);
+        data.set('file', file[0]);
+        e.preventDefault();
+         console.log(data);
+
+        const response = await fetch('http://localhost:5000/api/post/newpost',
+            {
+                method: "POST",
+                body: data,
+
+            }
+        )
+
+        console.log(response)
+
+    }
     const modules = {
         toolbar: [
             [{ 'header': [1, 2, false] }],
@@ -44,17 +66,7 @@ const Newpost = () => {
         'list', 'bullet', 'indent',
         'link', 'image'
     ]
-    const onChange = (e) => {
-        setPost({ ...post, [e.target.name]: e.target.value })
-    }
-    const formData = new FormData();
-    const handleImageSelect = (event) => {
-        setfile(event.target.files[0]);
 
-
-        // Append the image file to the FormData object
-        formData.append('image', file);
-    };
 
 
 
@@ -62,11 +74,11 @@ const Newpost = () => {
         <div className='new-postbox'>
             <div className="quote-box">Conversation is king. Content is just something to talk about <br></br> ~Cory Doctorow </div>
             <form className='new-post' onSubmit={submit}>
-                <input type="title" name='title' placeholder="Title" value={post.title} onChange={onChange} />
-                <input type="summary" name='summary' placeholder="Summary" onChange={onChange} value={post.summary} />
-                <input type="file" name='file' accept="image/*" onChange={handleImageSelect} />
-                <input name="content" value={post.content} onChange={onChange} />
-                <button className='pointer' disabled={post.title.length < 5 || post.summary.length < 5 || post.content.length < 5} style={{ marginTop: "5px" }}>Create post</button>
+                <input type="title" name='title' placeholder="Title" value={title} onChange={onChange1} />
+                <input type="summary" name='summary' placeholder="Summary" onChange={onChange2} value={summary} />
+                <input type="file" onChange={ev => setfile(ev.target.files)} />
+                <input name="content" value={content} onChange={onChange3} />
+                <button className='pointer' disabled={title.length < 5 || summary.length < 5 || content.length < 5} style={{ marginTop: "5px" }}>Create post</button>
             </form>
         </div>
     )

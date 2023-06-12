@@ -11,12 +11,11 @@ var cookieParser = require('cookie-parser')
 const privateKey = "jhagsfsakdgfduy";
 
 router.post('/newpost', upload.single('file'), async (req, res) => {
-    const originalname = req.body.file;
-    console.log(originalname)
-    // const parts = originalname.split('.');
-    // const ext = parts[parts.length - 1];
-    // const newpath = path + '.' + ext;
-    // fs.renameSync(path, newpath);
+    const {originalname,path}= req.file;
+    const parts = originalname.split('.');
+    const ext = parts[parts.length - 1];
+    const newpath= path+'.'+ext;
+    fs.renameSync(path,newpath);
     try {
         // const err = validationResult(req);
         // if (err) throw err
@@ -29,7 +28,7 @@ router.post('/newpost', upload.single('file'), async (req, res) => {
                 title: req.body.title,
                 summary: req.body.summary,
                 content: req.body.content,
-                file:req.body.file
+                cover:newpath,
             }
         )
         res.json(postdoc);
