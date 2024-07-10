@@ -17,7 +17,7 @@ const Homepage = () => {
   
   return (
     <>
-    <Header/>
+   
     <div className="post-box">
     
     {posts.length >0 && posts.map(post=>(

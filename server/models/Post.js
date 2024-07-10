@@ -33,5 +33,5 @@ const PostSchema = new Schema({
 });
 
 const Post = mongoose.model('post', PostSchema);
-// Post.createIndexes();
+Post.createIndexes();
 module.exports = Post

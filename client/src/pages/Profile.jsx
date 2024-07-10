@@ -1,5 +1,5 @@
 import React from 'react'
-
+import { Link } from "react-router-dom";
 const Profile = () => {
 //   const navBar = document.querySelector("nav"),
 //   menuBtns = document.querySelectorAll(".menu-icon"),
@@ -30,10 +30,10 @@ const Profile = () => {
         <div className="sidebar-content">
           <ul className="lists">
             <li className="list">
-              <a href="/" className="nav-link">
+              <Link to="/profile/setprofile" className="nav-link">
                 <i className="bx bx-home-alt icon"></i>
-                <span className="link">Dashboard</span>
-              </a>
+                <span className="link">Profile</span>
+              </Link>
             </li>
             <li className="list">
               <a href="/" className="nav-link">

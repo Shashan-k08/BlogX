@@ -12,11 +12,13 @@ import SignUp from './pages/SignUp';
 import Newpost from './pages/Newpost';
 import BlogState from './context/BlogState';
 import About from './pages/About';
+import SetProfile from './pages/SetProfile';
+import Header from './components/Header';
 function App() {
   return (
    
     <BrowserRouter>
-
+          <Header/>
       <Routes>
       
           <Route path='/' element={<Homepage />} />
@@ -24,6 +26,7 @@ function App() {
           <Route path={'/signup'} element={<SignUp />} />
           <Route path={'/create'} element={<Newpost />} />
           <Route path={'/profile'} element={<Profile />} />
+          <Route path={'/profile/setprofile'} element={<SetProfile />} />
           <Route path={'/about'} element={<About/>} />
        
       </Routes>

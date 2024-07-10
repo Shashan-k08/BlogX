@@ -32,7 +32,7 @@ router.post('/newpost', upload.single('file'), async (req, res) => {
             }
         )
         res.json(postdoc);
-        console.log(postdoc)
+       // console.log(postdoc)
     }
     catch (error) {
         console.error(error.message);

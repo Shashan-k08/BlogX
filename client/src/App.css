@@ -185,7 +185,7 @@ form.signup h1 {
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
   position: absolute;
   right: 4%;
-  top: 21%;
+  top: 18vh;
   z-index: 8;
 }
 
@@ -286,9 +286,17 @@ div.logo b {
   margin-top: 10vh;
 }
 
-@media screen and (max-width: 750px) {
+@media (max-width: 750px) {
   .box1 {
     flex-direction: column;
+  }
+ 
+}
+
+
+@media  (max-width: 750px) {
+  .modal {
+    background-color: #4070f4;
   }
 }
 
