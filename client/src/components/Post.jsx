@@ -5,7 +5,7 @@ import {format} from "date-fns";
     <div>
       <div className="post">
         <div className="image">{/* eslint-disable-next-line */}
-          <img src="https://techcrunch.com/wp-content/uploads/2022/07/this-week-in-apps-splash-2022.webp?w=730&crop=1" />
+          <img src={'https://blogx-y6xc.onrender.com/'+cover} />
         </div>
         <div className="texts">
           <h2>{title}</h2>

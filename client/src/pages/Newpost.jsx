@@ -31,6 +31,7 @@ const Newpost = () => {
     // }
 
     const submit = async (e) => {
+        console.log("hii")
         const data = new FormData();
         data.set('title', title);
         data.set('summary', summary);
@@ -73,12 +74,12 @@ const Newpost = () => {
     return (
         <div className='new-postbox'>
             <div className="quote-box">Conversation is king. Content is just something to talk about <br></br> ~Cory Doctorow </div>
-            <form className='new-post' onSubmit={submit}>
+            <form className='new-post' >
                 <input type="title" name='title' placeholder="Title" value={title} onChange={onChange1} />
                 <input type="summary" name='summary' placeholder="Summary" onChange={onChange2} value={summary} />
                 <input type="file" onChange={ev => setfile(ev.target.files)} />
                 <input name="content" value={content} onChange={onChange3} />
-                <button className='pointer' disabled={title.length < 5 || summary.length < 5 || content.length < 5} style={{ marginTop: "5px" }}>Create post</button>
+                <button className='pointer' onClick={submit} disabled={title.length < 5 || summary.length < 5 || content.length < 5} style={{ marginTop: "5px" }}>Create post</button>
             </form>
         </div>
     )
