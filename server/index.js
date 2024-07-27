@@ -6,7 +6,7 @@ const morgan = require("morgan");
 var cookieParser = require('cookie-parser')
 var cors = require('cors')
 connectToMongo();
- app.use(cors({credentials:true ,origin:'http://localhost:3000'}));
+ app.use(cors());
 // app.post('/signup',(req,res)=>{
 //     res.json('test ok');
 // })
