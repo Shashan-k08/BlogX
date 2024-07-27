@@ -6,7 +6,7 @@ import Header from '../components/Header'
 const Homepage = () => {
   const [posts, setposts] = useState([])
   useEffect(() => {
-    fetch('http://localhost:5000/api/post/fetchpost').then(response=>{
+    fetch('https://blogx-y6xc.onrender.com/api/post/fetchpost').then(response=>{
       response.json().then(posts=>{
         console.log(posts)
         setposts(posts);
