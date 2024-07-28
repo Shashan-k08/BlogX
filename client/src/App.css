@@ -563,10 +563,10 @@ form {
 .new-postbox{
   display: flex;
   flex-direction: column;
-  gap: 8rem;
+  gap: 4rem;
   align-items: center;
   justify-content: center;
-  margin: 8rem 0px;
+  margin: 4rem 0px;
 }
 .quote-box{
   text-align: end;
@@ -583,18 +583,6 @@ form {
   
 }
 
-.new-post::after {    content: "";
-  position: absolute;
-  height: 1613px;
-  width: 2000px;
-  top: -10%;
-  right: 48%;
-  z-index: -1;
-  transform: translateY(-50%);
-  background-image: linear-gradient(to right top, #cd30d9, #c445e3, #bb56ec, #b263f4, #a86ffb);
-  transition: 1.8s ease-in-out;
-  border-radius: 50%;
-}
 
 /* Google Fonts - Poppins */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
