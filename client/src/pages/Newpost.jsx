@@ -40,7 +40,7 @@ const Newpost = () => {
         e.preventDefault();
          console.log(data);
 
-        const response = await fetch('https://blogx-y6xc.onrender.com/api/post/newpost',
+        const response = await fetch('http://localhost:5000/api/post/newpost',
             {
                 method: "POST",
                 body: data,

@@ -3,10 +3,16 @@ const connectToMongo = require("./db");
 const app = express();
 const helmet = require("helmet");
 const morgan = require("morgan");
-var cookieParser = require("cookie-parser");
 var cors = require("cors");
+const dotenv = require("dotenv");
+dotenv.config({
+    path: './.env'
+})
+var cookieParser = require("cookie-parser");
+app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
+
 connectToMongo();
-app.use(cors());
+//app.use(cors());
 app.use(express.json());
 
 app.use(cookieParser());
